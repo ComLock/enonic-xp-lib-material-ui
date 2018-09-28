@@ -4,6 +4,7 @@
 //──────────────────────────────────────────────────────────────────────────────
 import glob from 'glob';
 import path from 'path';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin'; // Supports ECMAScript2015
 
 
@@ -88,6 +89,21 @@ const WEBPACK_CONFIG = {
 		filename: '[name].js',
 		libraryTarget: 'commonjs'
 	}, // output
+	plugins: [
+		new CopyWebpackPlugin([
+			{ from: '@material-ui/core/umd/', to: 'assets/material-ui/' },
+
+			// All?
+			//{ from: 'roboto-fontface/css/**/*.css', to: 'assets/' },
+			//{ from: 'roboto-fontface/fonts/', to: 'assets/roboto-fontface/fonts/' }
+
+			// Minimal
+			{ from: 'roboto-fontface/css/roboto/roboto-fontface.css', to: 'assets/roboto-fontface/css/roboto/'},
+			{ from: 'roboto-fontface/fonts/roboto', to: 'assets/roboto-fontface/fonts/roboto' }
+		], {
+			context: path.resolve(__dirname, 'node_modules')
+		})
+	], // plugins
 	resolve: {
 		alias: {
 			'/content-types': path.resolve(__dirname, SRC_DIR, 'site/content-types/index.es'),
