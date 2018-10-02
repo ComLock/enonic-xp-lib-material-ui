@@ -12,16 +12,14 @@ export function getHeadBegin({
 	host = request.host,
 	port = request.port
 } = {}) {
-	const path = 'roboto-fontface/css/roboto/roboto-fontface.css';
-	let href;
-	if (scheme && host) {
-		href = `${scheme}://${host}${addPort(port)}/app/${app.name}/${path}`;
-	} else {
-		href = assetUrl({path});
-	}
-	return [
-		`<link rel="stylesheet" href="${href}">`
+	const paths = [
+		'roboto-fontface/css/roboto/roboto-fontface.css',
+		'material-icons-font/material-icons-font.css'
 	];
+	if (scheme && host) {
+		return paths.map(path => `<link rel="stylesheet" href="${scheme}://${host}${addPort(port)}/app/${app.name}/${path}">`);
+	}
+	return paths.map(path => `<link rel="stylesheet" href="${assetUrl({path})}">`);
 }
 
 

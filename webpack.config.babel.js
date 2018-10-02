@@ -102,7 +102,10 @@ const WEBPACK_CONFIG = {
 			{ from: 'roboto-fontface/fonts/roboto', to: 'assets/roboto-fontface/fonts/roboto' },
 
 			{ from: 'react/umd/', to: 'assets/react' },
-			{ from: 'react-dom/umd/', to: 'assets/react-dom' }
+			{ from: 'react-dom/umd/', to: 'assets/react-dom' },
+
+			{ from: 'material-icons-font/material-icons-font.css', to: 'assets/material-icons-font/' },
+			{ from: 'material-icons-font/fonts', to: 'assets/material-icons-font/fonts' }
 		], {
 			context: path.resolve(__dirname, 'node_modules')
 		})
