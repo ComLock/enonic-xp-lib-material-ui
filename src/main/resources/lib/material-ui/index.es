@@ -1,8 +1,44 @@
-export const getHeadBegin = path => [
-	`<link rel="stylesheet" href="${path}/roboto-fontface/css/roboto/roboto-fontface.css">`
-];
+import {assetUrl} from '/lib/xp/portal';
 
 
-export const getBodyEnd = path => [
-	`<script src="${path}/material-ui/material-ui.production.min.js"></script>`
-];
+function addPort(port) {
+	return port ? `:${port}` : '';
+}
+
+
+export function getHeadBegin({
+	request = {},
+	scheme = request.scheme,
+	host = request.host,
+	port = request.port
+} = {}) {
+	const path = 'roboto-fontface/css/roboto/roboto-fontface.css';
+	let href;
+	if (scheme && host) {
+		href = `${scheme}://${host}${addPort(port)}/app/${app.name}/${path}`;
+	} else {
+		href = assetUrl({path});
+	}
+	return [
+		`<link rel="stylesheet" href="${href}">`
+	];
+}
+
+
+export function getBodyEnd({
+	request,
+	scheme = request.scheme,
+	host = request.host,
+	port = request.port
+} = {}) {
+	const path = 'material-ui/material-ui.production.min.js';
+	let src;
+	if (scheme && host) {
+		src = `${scheme}://${host}${addPort(port)}/app/${app.name}/${path}`;
+	} else {
+		src = assetUrl({path});
+	}
+	return [
+		`<script src="${src}"></script>`
+	];
+}
