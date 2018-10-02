@@ -99,7 +99,10 @@ const WEBPACK_CONFIG = {
 
 			// Minimal
 			{ from: 'roboto-fontface/css/roboto/roboto-fontface.css', to: 'assets/roboto-fontface/css/roboto/'},
-			{ from: 'roboto-fontface/fonts/roboto', to: 'assets/roboto-fontface/fonts/roboto' }
+			{ from: 'roboto-fontface/fonts/roboto', to: 'assets/roboto-fontface/fonts/roboto' },
+
+			{ from: 'react/umd/', to: 'assets/react' },
+			{ from: 'react-dom/umd/', to: 'assets/react-dom' }
 		], {
 			context: path.resolve(__dirname, 'node_modules')
 		})

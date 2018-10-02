@@ -26,19 +26,18 @@ export function getHeadBegin({
 
 
 export function getBodyEnd({
-	request,
+	request = {},
 	scheme = request.scheme,
 	host = request.host,
 	port = request.port
 } = {}) {
-	const path = 'material-ui/material-ui.production.min.js';
-	let src;
-	if (scheme && host) {
-		src = `${scheme}://${host}${addPort(port)}/app/${app.name}/${path}`;
-	} else {
-		src = assetUrl({path});
-	}
-	return [
-		`<script src="${src}"></script>`
+	const paths = [
+		'react/react.production.min.js',
+		'react-dom/react-dom.production.min.js',
+		'material-ui/material-ui.production.min.js'
 	];
+	if (scheme && host) {
+		return paths.map(path => `<script src="${scheme}://${host}${addPort(port)}/app/${app.name}/${path}"></script>`);
+	}
+	return paths.map(path => `<script src="${assetUrl({path})}"></script>`);
 }
