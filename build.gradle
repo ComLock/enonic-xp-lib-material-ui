@@ -1,6 +1,7 @@
 plugins {
 	id 'java' // Needed for assemble and build
-	//id 'maven' // When is this needed?
+	id 'maven' // When is this needed?
+	id 'maven-publish' // Provides publishToMavenLocal
 	//id 'com.enonic.defaults' version '2.0.0' // Only needed when you want to publish to Enonic repo
 	id 'com.moowork.node' version '1.2.0'
 }
@@ -65,3 +66,17 @@ processResources {
 
 //processResources.mustRunAfter webpack
 processResources.dependsOn webpack
+
+
+publishing {
+    publications {
+        mavenJava( MavenPublication ) {
+            from components.java
+        }
+    }
+    /*repositories {
+        maven {
+            url 'http://repo.enonic.net/artifactory/public'
+        }
+    }*/
+}
